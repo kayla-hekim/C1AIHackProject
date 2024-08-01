@@ -31,3 +31,5 @@ user_id = st.number_input("Enter your user ID:", min_value=1, max_value=500, ste
 if user_input and user_id:
     sentiment_response = determine_sentiment(user_id)
     st.text_area("Bot:", value=sentiment_response, height=200)
+
+#to run in browser, do "streamlit run financial_chatbot.py" in terminal
