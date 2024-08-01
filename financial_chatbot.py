@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 
 # Set your OpenAI API key
-openai.api_key = 'API-key######FORLATER'
+openai.api_key = '###'
 
 # Load the CSV file
 df = pd.read_csv('Corrected_Bank_Transactions_Data.csv')  # Updated to a relative path
@@ -23,13 +23,21 @@ def determine_sentiment(user_id):
 
 # Streamlit UI
 st.title("Financial Advisor Chatbot")
-st.write("Type your message and provide your user ID to get insights into your checkings account.")
+st.write("Type your message and provide your user ID to get insights into your checking account.")
+st.text_area("Bot:", "Hey Bestie!\nI'm Pac, your Capital One friend. I'm not a human, but I'm here to support you 24/7. Ask me a question about your savings progress, and I'll provide some motivation!")
 
+# Input field for the user to type their question
 user_input = st.text_input("You: ", "")
+
+# Input field for the user to enter their user ID
 user_id = st.number_input("Enter your user ID:", min_value=1, max_value=500, step=1)
 
+# If both user input and user ID are provided
 if user_input and user_id:
+    # Determine the sentiment response based on the user ID
     sentiment_response = determine_sentiment(user_id)
+    # Display the bot's response in a text area
     st.text_area("Bot:", value=sentiment_response, height=200)
 
-#to run in browser, do "streamlit run financial_chatbot.py" in terminal
+# To run this app in your browser, use the following command in your terminal:
+# streamlit run financial_chatbot.py
