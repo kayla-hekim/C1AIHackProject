@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Advisor Chatbot</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='/home.css') }}">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>PAC :D<h1>
-            <p>Your bestie in savings<br><br>Type your message and provide your user ID to get insights into your checkings account.</p>
+            <h1 class="thingabove">p a ¢<h1>
+            <p>Hey bestie!</p>
+            <p>I'm Pac, your Capital One friend. I'm not a human, but I'm here to be your best savings friend. Ask me a question about your savings progress, and I'll provide some motivation!</p>
         </div>
         <div id="chat-box" class="chat-box">
             <!-- Chat messages will be dynamically inserted here -->
         </div>
         <div class="input-box">
-            <input type="text" id="user-input" placeholder="Type your message...">
-            <input type="number" id="user-id" placeholder="ID" min="1" max="500">
+            <input type="text" id="user-input" placeholder="Enter your message here">
+            <input type="number" id="user-id" placeholder="Account ID here" min="1" max="500">
             <button onclick="sendMessage()">Send</button>
         </div>
         <div class="footer">© 2024 Pac Chatbot</div>
@@ -31,7 +32,7 @@
                 
                 // Append user message to chat box
                 const userMessageDiv = document.createElement('div');
-                userMessageDiv.className = 'chat-message user-message';
+                userMessageDiv.className = 'chat-message-user-message';
                 userMessageDiv.innerText = userInput;
                 chatBox.appendChild(userMessageDiv);
 
@@ -58,7 +59,7 @@
                 .then(data => {
                     // Append bot message to chat box
                     const botMessageDiv = document.createElement('div');
-                    botMessageDiv.className = 'chat-message bot-message';
+                    botMessageDiv.className = 'chat-message-bot-message';
                     botMessageDiv.innerHTML = data.response;
                     chatBox.appendChild(botMessageDiv);
                     
