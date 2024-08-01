@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save | Capital One</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles2.css') }}">
+</head>
+<body>
+    <!-- <h1>Welcome to the Savings App</h1> -->
+    <p>Savings Goal: {{ data.goal }} </p>
+    <p> Predicted Completion Date: {{data.date }}</p>
+    <img src="data:image/png;base64,{{ chart_img }}" alt="Pie Chart">
+    <!-- <p>Savings Goal: {{ data.goal }}</p>
+    <p>Saved: {{ data.saved }}</p>
+    <p>Committed: {{ data.committed }}</p> -->
+    <p>Need Motivation? <br><br> Talk to Pac!</p>
+    <a href="./index.html" class="circle-button"> <img src="{{ url_for('static',filename='/AIbutton.png') }}" alt="Button Image" class="circle-image"></a>
+    <!-- <a href="/offers">Offers</a> -->
+    <!-- <a href="/index">Profile</a> -->
+    <!-- <a href="/save">Save</a> -->
+</body>
+</html>
