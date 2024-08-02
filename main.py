@@ -1,45 +1,52 @@
-# import openai
-from flask import Flask, request, jsonify, render_template
-import pandas as pd
-import random
+import matplotlib
+matplotlib.use('Agg')
+
+from flask import Flask, render_template, jsonify, request
+import matplotlib.pyplot as plt
+import io
+import base64
+from financial_chatbot import determine_sentiment
 
 app = Flask(__name__)
 
-# # Set your OpenAI API key
-# openai.api_key = 'key'
-
-# Load the CSV file
-df = pd.read_csv('Corrected_Bank_Transactions_Data.csv')
-
-# Enhanced function to determine sentiment based on savings goal fulfillment
-def determine_sentiment(user_id):
-    print(user_id)
-    print(df)
-    user_data = df[df['id'] == int(user_id)]
-    print(user_data)
-    if not user_data.empty:
-        if user_data['goal_fulfilled'].values[0] == 1:
-            positive_responses = [
-                "Guess what: You've reached your goal! Fantastic job! You're doing so great! Keep up the amazing work and make another goal.",
-                "You've done it, bestie! You've reached your goal, awesome! I'm so proud of you. Your dedication is paying off! You should totally make another goal.",
-                "I'm gonna praise you. Great job meeting your savings goal! You're on the right track. Continue that track by creating another goal.",
-                "Another goal has been MET! You're doing excellent and should create another goal. Keep up the great work and continue saving."
-            ]
-            return random.choice(positive_responses)
-        else:
-            motivational_responses = [
-                "You haven't met your goal, bestie. But, don't worry, you'll get there! Here is your affirmation: You are smart. You are the best saver. No one saves quite like you.",
-                "You haven't met your goal yet, but I believe in you. Keep trying! Here is an affirmation: I'm in awe of all you do. Has anyone told you how much progress you've made? Because it's a LOT of progress!",
-                "Unfortunately, the goal hasn't been met, my friend. Stay positive and keep pushing forward. Here's an affirmation: You are a disciplined saver, and your efforts are paying off.",
-                "Sorry, bestie, but your goal hasn't been met. Keep your head up! Here's your affirmation: You're capable of amazing things. Your saving habits are a testament to your strong will and determination.."
-            ]
-            return random.choice(motivational_responses)
-    else:
-        return "User ID not found. Please check your ID and try again."
+# Mock data
+savings_data = {
+    "goal": 1000,
+    "saved": 600,
+    "committed": 200,
+    "date": "2024-08-2"
+}
 
 @app.route('/')
-def index():
+def index2():
+    fig, ax = plt.subplots()
+    labels = ['Saved', 'Committed', 'Remaining']
+    sizes = [savings_data["saved"], savings_data["committed"], savings_data["goal"] - savings_data["saved"] - savings_data["committed"]]
+    ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
+    ax.axis('equal')
+    img = io.BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+    img_base64 = base64.b64encode(img.getvalue()).decode('utf-8')
+    return render_template('index2.html', data=savings_data, chart_img=img_base64)
+
+@app.route('/index')
+def home():
     return render_template('index.html')
+
+@app.route('/index2')
+def overview():
+    fig, ax = plt.subplots()
+    labels = ['Saved', 'Committed', 'Remaining']
+    sizes = [savings_data["saved"], savings_data["committed"], savings_data["goal"] - savings_data["saved"] - savings_data["committed"]]
+    ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
+    ax.axis('equal')
+    img = io.BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+    img_base64 = base64.b64encode(img.getvalue()).decode('utf-8')
+    # print("working")
+    return render_template('index2.html', chart_img=img_base64, data=savings_data)
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -52,5 +59,11 @@ def chat():
     
     return jsonify(response=response)
 
+@app.route('/motivate', methods=['POST'])
+def motivate():
+    user_input = request.json.get('message')
+    response = "Keep going! You're doing great!"  # Simple motivational response
+    return jsonify({'response': response})
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=3000)
