@@ -7,17 +7,23 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles2.css') }}">
 </head>
 <body>
-    <!-- <h1>Welcome to the Savings App</h1> -->
-    <p>Savings Goal: {{ data.goal }} </p>
-    <p> Predicted Completion Date: {{data.date }}</p>
-    <img src="data:image/png;base64,{{ chart_img }}" alt="Pie Chart">
-    <!-- <p>Savings Goal: {{ data.goal }}</p>
-    <p>Saved: {{ data.saved }}</p>
-    <p>Committed: {{ data.committed }}</p> -->
-    <p>Need Motivation? <br><br> Talk to Pac!</p>
-    <a href="./index.html" class="circle-button"> <img src="{{ url_for('static',filename='/AIbutton.png') }}" alt="Button Image" class="circle-image"></a>
-    <!-- <a href="/offers">Offers</a> -->
-    <!-- <a href="/index">Profile</a> -->
-    <!-- <a href="/save">Save</a> -->
+    <div class="container"> 
+        <div class="header">
+            <img src="{{ url_for('static', filename='CapitalOneLogo.png') }}" alt="logo">
+        </div>
+        <div class="information">
+            <p>Savings Goal: {{ data.goal }} </p>
+            <p> Predicted Completion Date: {{data.date }}</p>
+            <img src="data:image/png;base64,{{ chart_img }}" alt="Pie Chart">
+        </div>
+        <div class="motivation">
+            <div class="motivation-container">
+                <p>Need Motivation? <br><br> Talk to Pac! =></p>
+                <a href="/index" class="circle-button"> 
+                    <img src="{{ url_for('static',filename='/AIbutton.png') }}" alt="Button Image" class="circle-image">
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
