@@ -17,48 +17,73 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
 }
 .header {
-  text-align: center;
-  padding: 0;
-  margin: 0;
-  overflow-y: auto;
+  background: #013D5B;
+  font-size: 3px;
+  width: 100%;
+  height: 100%;
 }
-.header .thingabove {
+.header img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  background-color: #013D5B;
+}
+.container .information {
+  display: block;
+}
+.container .information p {
   margin-top: 0px;  
   font-size: 200%;
-  background-color: #013D5B;
   padding: 20px;
-}
-.header p {
-  font-size: 50%;
-  background-color: #5396C4;
   color: black;
-  float: left;
-  padding: 20px;
-  text-align: left;
-  border-radius: 10px;
-  margin: 10px;
-  margin-right: 370px;
-}
-
-.footer {
   text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-  color: #888;
+  margin-top: 30px;
+  margin-bottom: 0px;
 }
-  .circle-button {
-    border-radius: 50%;
-    padding: 10px;
-    text-align: center;
-    font-size: 24px;
-    color: white;
-    position: relative;
-  }
-
-  .circle-image {
-    width: 50%;
-    height: 50%;
-    border-radius: 10%;
-  }
+.container .information img {
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  margin: 0px;  
+  padding: 0;
+  color: black;
+  width: 65%;
+  margin-left: 135px;
+}
+.motivation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.motivation .motivation-container {
+  display: flex;
+  align-items: center;
+}
+.motivation .motivation-container p {
+  color: black;
+  margin-right: 10px; /* Adjust spacing between text and button */
+}
+.circle-button {
+  display: inline-block; 
+  text-decoration: none; 
+  border: none;
+}
+.circle-button img {
+  width: 100px;
+  height: auto;
+  border-radius: 10px;
+}
+.image-link:hover .image {
+  transform: scale(0.95);
+  transition: transform 0.2s;
+  position: fixed;
+}
